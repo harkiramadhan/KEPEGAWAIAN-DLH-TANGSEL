@@ -59,7 +59,7 @@
 								</td>
 								<td class="align-middle text-center">Rp. 20.000.000</td>
 								<td class="align-middle">
-									<a href="javascript:;" class="btn btn-sm btn-info w-100" data-toggle="tooltip" data-original-title="Edit user"> <i class="fas fa-eye"></i> </a>
+									<a href="<?= site_url('admin/kepegawaian/' . $row->nip . '/detail') ?>" class="btn btn-sm btn-info w-100" data-toggle="tooltip" data-original-title="Edit user"> <i class="fas fa-eye"></i> </a>
 								</td>
 							</tr>
                             <?php } ?>
