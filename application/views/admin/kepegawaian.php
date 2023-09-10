@@ -13,14 +13,14 @@
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="1px">NIP</th>
 								<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
 								<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Email</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">NO. REK</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">NO. BPJS</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">NO. NPWP</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">NO. KTP</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">SK</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">IJASAH</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">HONOR</th>
-								<th class="text-secondary opacity-7"></th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center" width="1px">NO. REK</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center" width="1px">NO. BPJS</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center" width="1px">NO. NPWP</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center" width="1px">NO. KTP</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center" width="1px">SK</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center" width="1px">IJASAH</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center" width="1px">HONOR</th>
+								<th class="text-secondary opacity-7" width="1px"></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -40,26 +40,26 @@
 								</td>
 								<td>admin@dlh.com</td>
 								<td class="align-middle text-center text-sm">
-                                    <button class="btn btn-sm btn-success w-100"><i class="fas fa-check me-2"></i> 0110215041</button>
+                                    <button class="btn btn-sm btn-success w-100 mb-0"><i class="fas fa-check me-2"></i> 0110215041</button>
 								</td>
                                 <td class="align-middle text-center text-sm">
-									<button class="btn btn-sm btn-success w-100"><i class="fas fa-check me-2"></i> 0110215041</button>
+									<button class="btn btn-sm btn-success w-100 mb-0"><i class="fas fa-check me-2"></i> 0110215041</button>
 								</td>
                                 <td class="align-middle text-center text-sm">
-									<button class="btn btn-sm btn-success w-100"><i class="fas fa-check me-2"></i> 0110215041</button>
+									<button class="btn btn-sm btn-success w-100 mb-0"><i class="fas fa-check me-2"></i> 0110215041</button>
 								</td>
                                 <td class="align-middle text-center text-sm">
-									<button class="btn btn-sm btn-success w-100"><i class="fas fa-check me-2"></i> 0110215041</button>
+									<button class="btn btn-sm btn-success w-100 mb-0"><i class="fas fa-check me-2"></i> 0110215041</button>
 								</td>
                                 <td class="align-middle text-center text-sm">
-									<button class="btn btn-sm btn-success w-100"><i class="fas fa-check"></i></button>
+									<button class="btn btn-sm btn-success w-100 mb-0"><i class="fas fa-check"></i></button>
 								</td>
                                 <td class="align-middle text-center text-sm">
-									<button class="btn btn-sm btn-success w-100"><i class="fas fa-check"></i></button>
+									<button class="btn btn-sm btn-success w-100 mb-0"><i class="fas fa-check"></i></button>
 								</td>
 								<td class="align-middle text-center">Rp. 20.000.000</td>
 								<td class="align-middle">
-									<a href="<?= site_url('admin/kepegawaian/' . $row->nip . '/detail') ?>" class="btn btn-sm btn-info w-100" data-toggle="tooltip" data-original-title="Edit user"> <i class="fas fa-eye"></i> </a>
+									<a href="<?= site_url('admin/kepegawaian/' . $row->nip . '/detail') ?>" class="btn btn-sm btn-info w-100 mb-0" data-toggle="tooltip" data-original-title="Edit user"> <i class="fas fa-eye"></i> </a>
 								</td>
 							</tr>
                             <?php } ?>
