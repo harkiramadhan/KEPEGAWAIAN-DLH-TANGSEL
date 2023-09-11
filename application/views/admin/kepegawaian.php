@@ -57,7 +57,9 @@
                                 <td class="align-middle text-center text-sm">
 									<button class="btn btn-sm btn-success w-100 mb-0"><i class="fas fa-check"></i></button>
 								</td>
-								<td class="align-middle text-center">Rp. 20.000.000</td>
+                                <td class="align-middle text-center text-sm">
+									<button class="btn btn-sm btn-success w-100 mb-0"><i class="fas fa-check"></i></button>
+								</td>
 								<td class="align-middle">
 									<a href="<?= site_url('admin/kepegawaian/' . $row->nip . '/detail') ?>" class="btn btn-sm btn-info w-100 mb-0" data-toggle="tooltip" data-original-title="Edit user"> <i class="fas fa-eye"></i> </a>
 								</td>
