@@ -20,6 +20,7 @@
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center" width="1px">SK</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center" width="1px">IJASAH</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center" width="1px">HONOR</th>
+								<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center" width="1px">FOTO</th>
 								<th class="text-secondary opacity-7" width="1px"></th>
 							</tr>
 						</thead>
@@ -38,27 +39,30 @@
 										</div>
 									</div>
 								</td>
-								<td>admin@dlh.com</td>
+								<td><?= $row->email ?></td>
 								<td class="align-middle text-center text-sm">
-                                    <button class="btn btn-sm btn-success w-100 mb-0"><i class="fas fa-check me-2"></i> 0110215041</button>
+                                    <button class="btn btn-sm <?= ($row->DOC_REK) ? 'btn-success' : 'btn-danger' ?> w-100 mb-0"><i class="fas <?= ($row->DOC_REK) ? 'fa-check' : 'fa-times' ?> me-2"></i> <?= $row->NOREK ?></button>
 								</td>
                                 <td class="align-middle text-center text-sm">
-									<button class="btn btn-sm btn-success w-100 mb-0"><i class="fas fa-check me-2"></i> 0110215041</button>
+									<button class="btn btn-sm <?= ($row->DOC_BPJS) ? 'btn-success' : 'btn-danger' ?> w-100 mb-0"><i class="fas <?= ($row->DOC_BPJS) ? 'fa-check' : 'fa-times' ?> me-2"></i> <?= $row->NOBPJS ?></button>
 								</td>
                                 <td class="align-middle text-center text-sm">
-									<button class="btn btn-sm btn-success w-100 mb-0"><i class="fas fa-check me-2"></i> 0110215041</button>
+									<button class="btn btn-sm <?= ($row->DOC_NPWP) ? 'btn-success' : 'btn-danger' ?> w-100 mb-0"><i class="fas <?= ($row->DOC_NPWP) ? 'fa-check' : 'fa-times' ?> me-2"></i> <?= $row->NPWP ?></button>
 								</td>
                                 <td class="align-middle text-center text-sm">
-									<button class="btn btn-sm btn-success w-100 mb-0"><i class="fas fa-check me-2"></i> 0110215041</button>
+									<button class="btn btn-sm <?= ($row->DOC_KTP) ? 'btn-success' : 'btn-danger' ?> w-100 mb-0"><i class="fas <?= ($row->DOC_KTP) ? 'fa-check' : 'fa-times' ?> me-2"></i><?= $row->NOKTP ?></button>
 								</td>
                                 <td class="align-middle text-center text-sm">
-									<button class="btn btn-sm btn-success w-100 mb-0"><i class="fas fa-check"></i></button>
+									<button class="btn btn-sm <?= ($row->DOC_SK) ? 'btn-success' : 'btn-danger' ?> w-100 mb-0"><i class="fas <?= ($row->DOC_SK) ? 'fa-check' : 'fa-times' ?>"></i></button>
 								</td>
                                 <td class="align-middle text-center text-sm">
-									<button class="btn btn-sm btn-success w-100 mb-0"><i class="fas fa-check"></i></button>
+									<button class="btn btn-sm <?= ($row->DOC_IJASAH) ? 'btn-success' : 'btn-danger' ?> w-100 mb-0"><i class="fas <?= ($row->DOC_IJASAH) ? 'fa-check' : 'fa-times' ?>"></i></button>
 								</td>
                                 <td class="align-middle text-center text-sm">
-									<button class="btn btn-sm btn-success w-100 mb-0"><i class="fas fa-check"></i></button>
+									<button class="btn btn-sm <?= ($row->DOC_HONOR) ? 'btn-success' : 'btn-danger' ?> w-100 mb-0"><i class="fas <?= ($row->DOC_HONOR) ? 'fa-check' : 'fa-times' ?>"></i></button>
+								</td>
+								<td class="align-middle text-center text-sm">
+									<button class="btn btn-sm <?= ($row->FOTO) ? 'btn-success' : 'btn-danger' ?> w-100 mb-0"><i class="fas <?= ($row->FOTO) ? 'fa-check' : 'fa-times' ?>"></i></button>
 								</td>
 								<td class="align-middle">
 									<a href="<?= site_url('admin/kepegawaian/' . $row->nip . '/detail') ?>" class="btn btn-sm btn-info w-100 mb-0" data-toggle="tooltip" data-original-title="Edit user"> <i class="fas fa-eye"></i> </a>

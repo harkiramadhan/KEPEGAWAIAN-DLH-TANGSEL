@@ -37,4 +37,9 @@ class Auth extends CI_Controller{
             }
         }
     }
+
+    function logout(){
+        session_destroy();
+        redirect('');
+    }
 }

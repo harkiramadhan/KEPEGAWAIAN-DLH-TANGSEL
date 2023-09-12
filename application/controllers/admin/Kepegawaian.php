@@ -20,4 +20,17 @@ class Kepegawaian extends CI_Controller{
         $this->load->view('admin/kepegawaian', $var);
         $this->load->view('admin/layout/footer', $var);
     }
+
+    function detail($nip){
+        $pegawai = $this->db->get_where('riwayat_data_utama', ['nip' => $nip])->row();
+        $var = [
+            'title' => 'Detail Kepegawaian - KEPEGAWAIAN DLH TANGSEL',
+            'pages' => 'Detail Pegawai - ' . $pegawai->nama,
+            'pegawai' => $pegawai
+        ];
+
+        $this->load->view('admin/layout/header', $var);
+        $this->load->view('admin/detail-kepegawaian', $var);
+        $this->load->view('admin/layout/footer', $var);
+    }
 }
