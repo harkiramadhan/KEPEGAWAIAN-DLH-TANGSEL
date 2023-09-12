@@ -27,7 +27,8 @@ class Auth extends CI_Controller{
             if($cekPegawai->num_rows() > 0){
                 $this->session->set_userdata([
                     'is_login' => TRUE,
-                    'username' => $cekPegawai->row()->nama
+                    'username' => $cekPegawai->row()->nama,
+                    'nip' => $cekPegawai->row()->nip
                 ]);
 
                 redirect('dashboard','refresh');

@@ -10,10 +10,11 @@ class Kepegawaian extends CI_Controller{
     }
 
     function index(){
+        $nip = $this->session->userdata('nip');
         $var = [
             'title' => 'Kepegawaian - KEPEGAWAIAN DLH TANGSEL',
             'pages' => 'Data Pegawai',
-            'pegawai' => $this->db->get('riwayat_data_utama')
+            'pegawai' => $this->db->get_where('riwayat_data_utama', ['nip' => $nip])->row()
         ];
 
         $this->load->view('layout/header', $var);

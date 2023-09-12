@@ -25,6 +25,18 @@
   <script>
     $('#table').DataTable();
 
+    function previewImage() {
+      var element = document.getElementById("image-preview")
+      element.classList.remove("d-none")
+      document.getElementById("image-preview").style.display = "block"
+
+      var oFReader = new FileReader()
+      oFReader.readAsDataURL(document.getElementById("image-source").files[0])
+      oFReader.onload = function(oFREvent) {
+          document.getElementById("image-preview").src = oFREvent.target.result
+      }
+  }
+
     var ctx1 = document.getElementById("chart-line").getContext("2d");
 
     var gradientStroke1 = ctx1.createLinearGradient(0, 230, 0, 50);
