@@ -25,18 +25,6 @@
   <script>
     $('#table').DataTable();
 
-    function previewImage() {
-      var element = document.getElementById("image-preview")
-      element.classList.remove("d-none")
-      document.getElementById("image-preview").style.display = "block"
-
-      var oFReader = new FileReader()
-      oFReader.readAsDataURL(document.getElementById("image-source").files[0])
-      oFReader.onload = function(oFREvent) {
-          document.getElementById("image-preview").src = oFREvent.target.result
-      }
-  }
-
     var ctx1 = document.getElementById("chart-line").getContext("2d");
 
     var gradientStroke1 = ctx1.createLinearGradient(0, 230, 0, 50);
@@ -132,6 +120,68 @@
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="<?= base_url('assets/js/argon-dashboard.min.js?v=2.0.4') ?>"></script>
+
+  <script>
+    function previewImage() {
+        var element = document.getElementById("image-preview")
+        element.classList.remove("d-none")
+        document.getElementById("image-preview").style.display = "block"
+
+        var oFReader = new FileReader()
+        oFReader.readAsDataURL(document.getElementById("image-source").files[0])
+        oFReader.onload = function(oFREvent) {
+            document.getElementById("image-preview").src = oFREvent.target.result
+        }
+    }
+
+    function previewImageKTP() {
+        var element = document.getElementById("image-preview-KTP")
+        element.classList.remove("d-none")
+        document.getElementById("image-preview-KTP").style.display = "block"
+
+        var oFReader = new FileReader()
+        oFReader.readAsDataURL(document.getElementById("image-source-KTP").files[0])
+        oFReader.onload = function(oFREvent) {
+            document.getElementById("image-preview-KTP").src = oFREvent.target.result
+        }
+    }
+
+    function previewImageREK() {
+        var element = document.getElementById("image-preview-REK")
+        element.classList.remove("d-none")
+        document.getElementById("image-preview-REK").style.display = "block"
+
+        var oFReader = new FileReader()
+        oFReader.readAsDataURL(document.getElementById("image-source-REK").files[0])
+        oFReader.onload = function(oFREvent) {
+            document.getElementById("image-preview-REK").src = oFREvent.target.result
+        }
+    }
+
+    function previewImageBPJS() {
+        var element = document.getElementById("image-preview-BPJS")
+        element.classList.remove("d-none")
+        document.getElementById("image-preview-BPJS").style.display = "block"
+
+        var oFReader = new FileReader()
+        oFReader.readAsDataURL(document.getElementById("image-source-BPJS").files[0])
+        oFReader.onload = function(oFREvent) {
+            document.getElementById("image-preview-BPJS").src = oFREvent.target.result
+        }
+    }
+
+    function previewImageNPWP() {
+        var element = document.getElementById("image-preview-NPWP")
+        element.classList.remove("d-none")
+        document.getElementById("image-preview-NPWP").style.display = "block"
+
+        var oFReader = new FileReader()
+        oFReader.readAsDataURL(document.getElementById("image-source-NPWP").files[0])
+        oFReader.onload = function(oFREvent) {
+            document.getElementById("image-preview-NPWP").src = oFREvent.target.result
+        }
+    }
+  </script>
 </body>
 
 </html>
