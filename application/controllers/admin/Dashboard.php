@@ -12,11 +12,16 @@ class Dashboard extends CI_Controller{
     function index(){
         $var = [
             'title' => 'Dashboard Admin - KEPEGAWAIAN DLH TANGSEL',
-            'pages' => 'Dashboard'
+            'pages' => 'Dashboard',
+            'pegawai' => $this->db->select('nama')->get('riwayat_data_utama')->num_rows()
         ];
 
         $this->load->view('admin/layout/header', $var);
         $this->load->view('admin/dashboard', $var);
         $this->load->view('admin/layout/footer', $var);
+    }
+
+    function autoLogin(){
+        redirect('https://presensitksdlh.prdlhtangsel.com/autologin.php?username=admin&password=4dm1n4j4');
     }
 }
