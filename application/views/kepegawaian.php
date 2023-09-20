@@ -56,6 +56,7 @@
 
                             <?php if($pegawai->DOC_KTP): ?>
                                 <img id="image-preview-KTP" alt="image preview" class="rounded border mb-3" src="<?= base_url('assets/doc/' . $pegawai->DOC_KTP) ?>" style="width: 100%;">
+                                <a href="<?= base_url('assets/doc/' . $pegawai->DOC_KTP) ?>" class="btn btn-sm btn-primary w-100" download><i class="fas fa-download me-2"></i> Download</a>
                             <?php else: ?>
                                 <img id="image-preview-KTP" alt="image preview" class="rounded border mb-3 d-none" src="#" style="width: 100%;">
                             <?php endif; ?>
@@ -76,6 +77,7 @@
 
                             <?php if($pegawai->DOC_REK): ?>
                                 <img id="image-preview-REK" alt="image preview" class="rounded border mb-3" src="<?= base_url('assets/doc/' . $pegawai->DOC_REK) ?>" style="width: 100%;">
+                                <a href="<?= base_url('assets/doc/' . $pegawai->DOC_REK) ?>" class="btn btn-sm btn-primary w-100" download><i class="fas fa-download me-2"></i> Download</a>
                             <?php else: ?>
                                 <img id="image-preview-REK" alt="image preview" class="rounded border mb-3 d-none" src="#" style="width: 100%;">
                             <?php endif; ?>
@@ -96,6 +98,7 @@
 
                             <?php if($pegawai->DOC_BPJS): ?>
                                 <img id="image-preview-BPJS" alt="image preview" class="rounded border mb-3" src="<?= base_url('assets/doc/' . $pegawai->DOC_BPJS) ?>" style="width: 100%;">
+                                <a href="<?= base_url('assets/doc/' . $pegawai->DOC_BPJS) ?>" class="btn btn-sm btn-primary w-100" download><i class="fas fa-download me-2"></i> Download</a>
                             <?php else: ?>
                                 <img id="image-preview-BPJS" alt="image preview" class="rounded border mb-3 d-none" src="#" style="width: 100%;">
                             <?php endif; ?>
@@ -116,6 +119,7 @@
 
                             <?php if($pegawai->DOC_NPWP): ?>
                                 <img id="image-preview-NPWP" alt="image preview" class="rounded border mb-3" src="<?= base_url('assets/doc/' . $pegawai->DOC_NPWP) ?>" style="width: 100%;">
+                                <a href="<?= base_url('assets/doc/' . $pegawai->DOC_NPWP) ?>" class="btn btn-sm btn-primary w-100" download><i class="fas fa-download me-2"></i> Download</a>
                             <?php else: ?>
                                 <img id="image-preview-NPWP" alt="image preview" class="rounded border mb-3 d-none" src="#" style="width: 100%;">
                             <?php endif; ?>
@@ -136,6 +140,7 @@
                                 <div class="ratio ratio-4x3">
                                     <embed type="application/pdf" src="<?= base_url('assets/doc/' . $pegawai->DOC_SK) ?>" width="600" height="400"></embed>
                                 </div>
+                                <a href="<?= base_url('assets/doc/' . $pegawai->DOC_SK) ?>" class="btn btn-sm btn-primary w-100 mt-2" download><i class="fas fa-download me-2"></i> Download</a>
                             <?php endif; ?>
 
                             <div class="form-group">
@@ -148,6 +153,7 @@
                                 <div class="ratio ratio-4x3">
                                     <embed type="application/pdf" src="<?= base_url('assets/doc/' . $pegawai->DOC_HONOR) ?>" width="600" height="400"></embed>
                                 </div>
+                                <a href="<?= base_url('assets/doc/' . $pegawai->DOC_HONOR) ?>" class="btn btn-sm btn-primary w-100 mt-2" download><i class="fas fa-download me-2"></i> Download</a>
                             <?php endif; ?>
 
                             <div class="form-group">
@@ -160,6 +166,7 @@
                                 <div class="ratio ratio-4x3">
                                     <embed type="application/pdf" src="<?= base_url('assets/doc/' . $pegawai->DOC_IJASAH) ?>" width="600" height="400"></embed>
                                 </div>
+                                <a href="<?= base_url('assets/doc/' . $pegawai->DOC_IJASAH) ?>" class="btn btn-sm btn-primary w-100 mt-2" download><i class="fas fa-download me-2"></i> Download</a>
                             <?php endif; ?>
 
                             <div class="form-group">
@@ -178,6 +185,7 @@
                         <label>PAS FOTO 4*6 <small><strong class="text-danger">*) PNG/JPG/JPEG</strong></label>
                         <?php if($pegawai->FOTO): ?>
                             <img id="image-preview" alt="image preview" class="rounded border mb-3" src="<?= base_url('assets/doc/' . $pegawai->FOTO) ?>" style="width: 100%;">
+                            <a href="<?= base_url('assets/doc/' . $pegawai->FOTO) ?>" class="btn btn-sm btn-primary w-100" download><i class="fas fa-download me-2"></i> Download</a>
                         <?php else: ?>
                             <img id="image-preview" alt="image preview" class="rounded border mb-3 d-none" src="#" style="width: 100%;">
                         <?php endif; ?>
