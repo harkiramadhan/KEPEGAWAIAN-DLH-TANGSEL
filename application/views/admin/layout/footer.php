@@ -132,6 +132,112 @@
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="<?= base_url('assets/js/argon-dashboard.min.js?v=2.0.4') ?>"></script>
+  <script>
+    var rupiah = document.getElementById('rupiah');
+		rupiah.addEventListener('keyup', function(e){
+			// tambahkan 'Rp.' pada saat form di ketik
+			// gunakan fungsi formatRupiah() untuk mengubah angka yang di ketik menjadi format angka
+			rupiah.value = formatRupiah(this.value, '');
+		});
+
+    function formatRupiah(angka, prefix){
+			var number_string = angka.replace(/[^,\d]/g, '').toString(),
+			split   		= number_string.split(','),
+			sisa     		= split[0].length % 3,
+			rupiah     		= split[0].substr(0, sisa),
+			ribuan     		= split[0].substr(sisa).match(/\d{3}/gi);
+ 
+			// tambahkan titik jika yang di input sudah menjadi angka ribuan
+			if(ribuan){
+				separator = sisa ? '.' : '';
+				rupiah += separator + ribuan.join('.');
+			}
+ 
+			rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+			return prefix == undefined ? rupiah : (rupiah ? '' + rupiah : '');
+		}
+
+    function previewImage() {
+        var element = document.getElementById("image-preview")
+        element.classList.remove("d-none")
+        document.getElementById("image-preview").style.display = "block"
+
+        var oFReader = new FileReader()
+        oFReader.readAsDataURL(document.getElementById("image-source").files[0])
+        oFReader.onload = function(oFREvent) {
+            document.getElementById("image-preview").src = oFREvent.target.result
+        }
+    }
+
+    function previewImageKTP() {
+        var element = document.getElementById("image-preview-KTP")
+        element.classList.remove("d-none")
+        document.getElementById("image-preview-KTP").style.display = "block"
+
+        var oFReader = new FileReader()
+        oFReader.readAsDataURL(document.getElementById("image-source-KTP").files[0])
+        oFReader.onload = function(oFREvent) {
+            document.getElementById("image-preview-KTP").src = oFREvent.target.result
+        }
+    }
+
+    function previewImageREK() {
+        var element = document.getElementById("image-preview-REK")
+        element.classList.remove("d-none")
+        document.getElementById("image-preview-REK").style.display = "block"
+
+        var oFReader = new FileReader()
+        oFReader.readAsDataURL(document.getElementById("image-source-REK").files[0])
+        oFReader.onload = function(oFREvent) {
+            document.getElementById("image-preview-REK").src = oFREvent.target.result
+        }
+    }
+
+    function previewImageBPJS() {
+        var element = document.getElementById("image-preview-BPJS")
+        element.classList.remove("d-none")
+        document.getElementById("image-preview-BPJS").style.display = "block"
+
+        var oFReader = new FileReader()
+        oFReader.readAsDataURL(document.getElementById("image-source-BPJS").files[0])
+        oFReader.onload = function(oFREvent) {
+            document.getElementById("image-preview-BPJS").src = oFREvent.target.result
+        }
+    }
+
+    function previewImageBPJSNaker() {
+        var element = document.getElementById("image-preview-BPJS-Naker")
+        element.classList.remove("d-none")
+        document.getElementById("image-preview-BPJS-Naker").style.display = "block"
+
+        var oFReader = new FileReader()
+        oFReader.readAsDataURL(document.getElementById("image-source-BPJS-Naker").files[0])
+        oFReader.onload = function(oFREvent) {
+            document.getElementById("image-preview-BPJS-Naker").src = oFREvent.target.result
+        }
+    }
+
+    function previewImageNPWP() {
+        var element = document.getElementById("image-preview-NPWP")
+        element.classList.remove("d-none")
+        document.getElementById("image-preview-NPWP").style.display = "block"
+
+        var oFReader = new FileReader()
+        oFReader.readAsDataURL(document.getElementById("image-source-NPWP").files[0])
+        oFReader.onload = function(oFREvent) {
+            document.getElementById("image-preview-NPWP").src = oFREvent.target.result
+        }
+    }
+
+    $('.btn-lihat-document').click(function(){
+      var doc = $(this).attr('data-document')
+
+      $('.data-pdf').empty()
+      $('.data-pdf').append("<embed type='application/pdf' src='" + doc + "' width='600' height='400'></embed>")
+
+      $('#modal-doc').modal('show')
+    })
+  </script>
 </body>
 
 </html>

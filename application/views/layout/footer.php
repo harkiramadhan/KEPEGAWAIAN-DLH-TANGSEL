@@ -170,6 +170,18 @@
         }
     }
 
+    function previewImageBPJSNaker() {
+        var element = document.getElementById("image-preview-BPJS-Naker")
+        element.classList.remove("d-none")
+        document.getElementById("image-preview-BPJS-Naker").style.display = "block"
+
+        var oFReader = new FileReader()
+        oFReader.readAsDataURL(document.getElementById("image-source-BPJS-Naker").files[0])
+        oFReader.onload = function(oFREvent) {
+            document.getElementById("image-preview-BPJS-Naker").src = oFREvent.target.result
+        }
+    }
+
     function previewImageNPWP() {
         var element = document.getElementById("image-preview-NPWP")
         element.classList.remove("d-none")
