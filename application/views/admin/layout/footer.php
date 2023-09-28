@@ -22,7 +22,55 @@
   <script src="<?= base_url('assets/js/plugins/smooth-scrollbar.min.js') ?>"></script>
   <script src="<?= base_url('assets/js/plugins/chartjs.min.js') ?>"></script>
   <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+  <?php if($this->uri->segment(2) == 'foto'): ?>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.js"></script>
+    <script language="JavaScript">
+      Webcam.set({
+        width: 750,
+        height: 1000,
+        image_format: 'jpeg',
+        jpeg_quality: 100,
+        flip_horiz: true,
+        constraints: {
+          width: { exact: 750 },
+          height: { exact: 1000 }
+        }
+      });
+      Webcam.attach( '#my_camera' );
+
+      $('#upload').on('submit', function (event) {
+        event.preventDefault();
+        var image = '';
+        var nip = $('#nip').val();
+        Webcam.snap( function(data_uri) {
+          image = data_uri;
+        });
+        $.ajax({
+          url: '<?php echo site_url("admin/foto/save");?>',
+          type: 'POST',
+          dataType: 'json',
+          data: {nip: nip, image:image},
+        }).done(function(data) {
+          if (data === 1) {
+            alert('Foto Berhasil Di Upload');
+            location.reload()
+          }
+        }).fail(function() {
+          console.log("error");
+        }).always(function() {
+          console.log("complete");
+        });
+      });
+    </script>
+  <?php endif; ?>
+
   <script>
+    $(document).ready(function() {
+        $('.select2').select2();
+    });
+
     $('#table').DataTable();
 
     function previewImage() {

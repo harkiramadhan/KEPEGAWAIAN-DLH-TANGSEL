@@ -33,6 +33,8 @@
 
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.css" />
+
+		<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 	</head>
 	<body class="g-sidenav-show   bg-gray-100">
 		<div class="min-height-300 bg-warning position-absolute w-100"></div>
@@ -70,6 +72,14 @@
 								<i class="fas fa-users text-warning text-sm opacity-10"></i>
 							</div>
 							<span class="nav-link-text ms-1">Kepegawaian</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link <?= ($this->uri->segment(2) == 'foto') ? 'active' : '' ?>" href="<?= site_url('admin/foto') ?>">
+							<div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+								<i class="fas fa-camera text-primary text-sm opacity-10"></i>
+							</div>
+							<span class="nav-link-text ms-1">Foto</span>
 						</a>
 					</li>
 				</ul>
