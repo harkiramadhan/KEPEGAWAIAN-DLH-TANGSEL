@@ -22,6 +22,8 @@
   <script src="<?= base_url('assets/js/plugins/smooth-scrollbar.min.js') ?>"></script>
   <script src="<?= base_url('assets/js/plugins/chartjs.min.js') ?>"></script>
   <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/searchpanes/2.2.0/js/dataTables.searchPanes.min.js"></script>
+  <script src="https://cdn.datatables.net/select/1.7.0/js/dataTables.select.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
   <?php if($this->uri->segment(2) == 'foto'): ?>
@@ -64,14 +66,166 @@
         });
       });
     </script>
+
+  <?php elseif($this->uri->segment(2) == 'dashboard'): ?>
+    <script>
+      var ctx1 = document.getElementById("chart-line").getContext("2d");
+      var gradientStroke1 = ctx1.createLinearGradient(0, 230, 0, 50);
+      gradientStroke1.addColorStop(1, 'rgba(94, 114, 228, 0.2)');
+      gradientStroke1.addColorStop(0.2, 'rgba(94, 114, 228, 0.0)');
+      gradientStroke1.addColorStop(0, 'rgba(94, 114, 228, 0)');
+
+      $.ajax({
+        url: '<?= site_url('admin/dashboard/lineChart') ?>',
+        type: 'get',
+        success: function(res){
+          new Chart(ctx1, {
+            type: "line",
+            data: {
+              labels: res.labels,
+              datasets: [{
+                label: "Data Pegawai",
+                tension: 0.4,
+                borderWidth: 0,
+                pointRadius: 0,
+                borderColor: "#5e72e4",
+                backgroundColor: gradientStroke1,
+                borderWidth: 3,
+                fill: true,
+                data: res.data,
+                maxBarThickness: 6
+    
+              }],
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                legend: {
+                  display: false,
+                }
+              },
+              interaction: {
+                intersect: false,
+                mode: 'index',
+              },
+              scales: {
+                y: {
+                  grid: {
+                    drawBorder: false,
+                    display: true,
+                    drawOnChartArea: true,
+                    drawTicks: false,
+                    borderDash: [5, 5]
+                  },
+                  ticks: {
+                    display: true,
+                    padding: 10,
+                    color: '#fbfbfb',
+                    font: {
+                      size: 11,
+                      family: "Open Sans",
+                      style: 'normal',
+                      lineHeight: 2
+                    },
+                  }
+                },
+                x: {
+                  grid: {
+                    drawBorder: false,
+                    display: false,
+                    drawOnChartArea: false,
+                    drawTicks: false,
+                    borderDash: [5, 5]
+                  },
+                  ticks: {
+                    display: true,
+                    color: '#ccc',
+                    padding: 20,
+                    font: {
+                      size: 11,
+                      family: "Open Sans",
+                      style: 'normal',
+                      lineHeight: 2
+                    },
+                  }
+                },
+              },
+            },
+          });
+        }
+      })
+    </script>
+
+  <?php elseif($this->uri->segment(2) == 'kepegawaian'): ?>
+    <script>
+      $('#table').DataTable({
+        dom: 'Plfrtip',
+        columnDefs: [
+              {
+                  searchPanes: {
+                      show: false
+                  },
+                  targets: [0]
+              },{
+                  searchPanes: {
+                      show: false
+                  },
+                  targets: [1]
+              },{
+                  searchPanes: {
+                      show: false
+                  },
+                  targets: [2]
+              },{
+                  searchPanes: {
+                      show: false
+                  },
+                  targets: [4]
+              },{
+                  searchPanes: {
+                      show: false
+                  },
+                  targets: [5]
+              },{
+                  searchPanes: {
+                      show: false
+                  },
+                  targets: [6]
+              },{
+                  searchPanes: {
+                      show: false
+                  },
+                  targets: [7]
+              },{
+                  searchPanes: {
+                      show: false
+                  },
+                  targets: [8]
+              },{
+                  searchPanes: {
+                      show: false
+                  },
+                  targets: [9]
+              },{
+                  searchPanes: {
+                      show: false
+                  },
+                  targets: [10]
+              }
+          ]
+      });
+    </script>
+  <?php else: ?>
+    <script>
+      $('#table').DataTable();
+    </script>
   <?php endif; ?>
 
   <script>
     $(document).ready(function() {
         $('.select2').select2();
     });
-
-    $('#table').DataTable();
 
     function previewImage() {
       var element = document.getElementById("image-preview")
@@ -83,89 +237,7 @@
       oFReader.onload = function(oFREvent) {
           document.getElementById("image-preview").src = oFREvent.target.result
       }
-  }
-
-    var ctx1 = document.getElementById("chart-line").getContext("2d");
-
-    var gradientStroke1 = ctx1.createLinearGradient(0, 230, 0, 50);
-
-    gradientStroke1.addColorStop(1, 'rgba(94, 114, 228, 0.2)');
-    gradientStroke1.addColorStop(0.2, 'rgba(94, 114, 228, 0.0)');
-    gradientStroke1.addColorStop(0, 'rgba(94, 114, 228, 0)');
-    new Chart(ctx1, {
-      type: "line",
-      data: {
-        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        datasets: [{
-          label: "Mobile apps",
-          tension: 0.4,
-          borderWidth: 0,
-          pointRadius: 0,
-          borderColor: "#5e72e4",
-          backgroundColor: gradientStroke1,
-          borderWidth: 3,
-          fill: true,
-          data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
-          maxBarThickness: 6
-
-        }],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false,
-          }
-        },
-        interaction: {
-          intersect: false,
-          mode: 'index',
-        },
-        scales: {
-          y: {
-            grid: {
-              drawBorder: false,
-              display: true,
-              drawOnChartArea: true,
-              drawTicks: false,
-              borderDash: [5, 5]
-            },
-            ticks: {
-              display: true,
-              padding: 10,
-              color: '#fbfbfb',
-              font: {
-                size: 11,
-                family: "Open Sans",
-                style: 'normal',
-                lineHeight: 2
-              },
-            }
-          },
-          x: {
-            grid: {
-              drawBorder: false,
-              display: false,
-              drawOnChartArea: false,
-              drawTicks: false,
-              borderDash: [5, 5]
-            },
-            ticks: {
-              display: true,
-              color: '#ccc',
-              padding: 20,
-              font: {
-                size: 11,
-                family: "Open Sans",
-                style: 'normal',
-                lineHeight: 2
-              },
-            }
-          },
-        },
-      },
-    });
+    }
   </script>
   <script>
     var win = navigator.platform.indexOf('Win') > -1;

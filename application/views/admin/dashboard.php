@@ -26,4 +26,16 @@
 			</div>
 		</div>
 	</div>
+	<div class="col-lg-12 mb-lg-0 mb-4 mt-4">
+		<div class="card z-index-2 h-100">
+			<div class="card-header pb-0 pt-3 bg-transparent">
+				<h6 class="text-capitalize">Pegawai</h6>
+			</div>
+			<div class="card-body p-3">
+				<div class="chart">
+					<canvas id="chart-line" class="chart-canvas" height="600" width="2152" style="display: block; box-sizing: border-box; height: 300px; width: 1076px;"></canvas>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
