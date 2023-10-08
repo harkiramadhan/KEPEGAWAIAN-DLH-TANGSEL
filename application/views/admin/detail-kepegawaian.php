@@ -171,49 +171,45 @@
 
                     <hr class="horizontal dark">
                     <div class="row">
-                        <p class="text-uppercase text-sm mb-n2">PENDIDIKAN</p>
-                        <div class="col-md-4 mt-3">
-                            <?php if($pegawai->DOC_IJASAH): ?>
-                                <div class="ratio ratio-4x3">
-                                    <embed type="application/pdf" src="<?= base_url('assets/doc/' . $pegawai->DOC_IJASAH) ?>" width="600" height="400"></embed>
-                                </div>
-                                <a href="<?= base_url('assets/doc/' . $pegawai->DOC_IJASAH) ?>" class="btn btn-sm btn-primary w-100 mt-2" download><i class="fas fa-download me-2"></i> Download</a>
-                            <?php endif; ?>
-
-                            <div class="form-group">
-                                <label for="example-text-input" class="form-control-label">Ijasah <small><strong class="text-danger">*) PDF</strong></small></label>
-                                <input class="form-control" type="file" name="DOC_IJASAH" value="<?= $pegawai->DOC_IJASAH ?>">
+                        <div class="row">
+                            <div class="col-lg-9">
+                                <p class="text-uppercase text-sm mb-n2">PENDIDIKAN</p>
+                            </div>
+                            <div class="col-lg-3 pe-0 me-0">
+                                <button type="button" class="btn btn-sm btn-primary w-100" data-bs-toggle="modal" data-bs-target="#modal-add-riwayat-pendidikan"><i class="fas fa-plus me-3"></i> RIWAYAT PENDIDIKAN</button>
                             </div>
                         </div>
 
-                        <div class="col-md-4 mt-3">
-                            <div class="form-group">
-                                <label for="example-text-input" class="form-control-label">Jenjang Pendidikan <small><strong class="text-danger">*</strong></small></label>
-                                <select class="form-control" name="JENJANG" id="">
-                                    <option value=""> - Pilih Jenjang Pendidikan</option>
-                                    <option <?= ($pegawai->JENJANG == 'SD') ? 'selected' : '' ?> value="SD"> SD</option>
-                                    <option <?= ($pegawai->JENJANG == 'SMP') ? 'selected' : '' ?> value="SMP"> SMP</option>
-                                    <option <?= ($pegawai->JENJANG == 'SMA') ? 'selected' : '' ?> value="SMA"> SMA</option>
-                                    <optgroup label="DIPLOMA">
-                                        <option <?= ($pegawai->JENJANG == 'D1') ? 'selected' : '' ?> value="D1"> D1</option>
-                                        <option <?= ($pegawai->JENJANG == 'D2') ? 'selected' : '' ?> value="D2"> D2</option>
-                                        <option <?= ($pegawai->JENJANG == 'D3') ? 'selected' : '' ?> value="D3"> D3</option>
-                                        <option <?= ($pegawai->JENJANG == 'D4') ? 'selected' : '' ?> value="D4"> D4</option>
-                                    </optgroup>
-                                    <optgroup label="SARJANA">
-                                        <option <?= ($pegawai->JENJANG == 'S1') ? 'selected' : '' ?> value="S1"> S1</option>
-                                        <option <?= ($pegawai->JENJANG == 'S2') ? 'selected' : '' ?> value="S2"> S2</option>
-                                        <option <?= ($pegawai->JENJANG == 'S3') ? 'selected' : '' ?> value="S3"> S3</option>
-                                    </optgroup>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 mt-3">
-                            <div class="form-group">
-                                <label for="example-text-input" class="form-control-label">Jurusan <small><strong class="text-danger">*</strong></small></label>
-                                <input class="form-control" type="text" name="JURUSAN" value="<?= $pegawai->JURUSAN ?>">
-                            </div>
+                        <div class="table-responsive p-3">
+                            <table class="table align-items-center mb-0" id="table2">
+                                <thead>
+                                    <tr>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center" width="1px">NO</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">JENJANG</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center" width="1px">JURUSAN</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center" width="1px">IJASAH</th>
+                                        <th class="text-secondary opacity-7" width="1px"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php $nos=1; foreach($pendidikan->result() as $row){ ?>
+                                        <tr>
+                                            <td class="text-center"><?= $nos++ ?>. </td>
+                                            <td><?= $row->JENJANG ?></td>
+                                            <td><?= $row->JURUSAN ?></td>
+                                            <td>
+                                                <?php if($row->DOC_IJASAH): ?>
+                                                    <button type="button" class="btn btn-sm btn-primary w-100 mb-0 btn-lihat-document" data-document="<?= base_url('assets/doc/' . $row->DOC_IJASAH) ?>"><i class="fas fa-eye me-2"></i> LIHAT IJASAH</button></td>
+                                                <?php else: ?>
+                                                    <button type="button" class="btn btn-sm btn-danger w-100 mb-0"><i class="fas fa-times"></i></button></td>
+                                                <?php endif; ?>
+                                            <td>
+                                                <a href="<?= site_url('admin/kepegawaian/removeRiwayatPendidikan/' . $row->id) ?>" class="btn btn-sm btn-danger w-100 mb-0"><i class="fas fa-trash"></i></a>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
@@ -224,7 +220,7 @@
                                 <p class="text-uppercase text-sm mb-n2">KEPEGAWAIAN</p>
                             </div>
                             <div class="col-lg-3 pe-0 me-0">
-                                <button type="button" class="btn btn-sm btn-primary w-100" data-bs-toggle="modal" data-bs-target="#modal-add-riwayat"><i class="fas fa-plus me-3"></i> RIWAYAT</button>
+                                <button type="button" class="btn btn-sm btn-primary w-100" data-bs-toggle="modal" data-bs-target="#modal-add-riwayat"><i class="fas fa-plus me-3"></i> RIWAYAT JABATAN</button>
                             </div>
                         </div>
                         
@@ -334,11 +330,69 @@
     </div>
 </div>
 
+<div class="modal fade" id="modal-add-riwayat-pendidikan" tabindex="-1" role="dialog" aria-labelledby="modal-add-riwayat" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-add-riwayat">Tambah Riwayat Pendidikan</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="<?= site_url('admin/kepegawaian/addRiwayatPendidikan') ?>" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="nip" value="<?= $pegawai->nip ?>">
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="example-text-input" class="form-control-label">Ijasah <small><strong class="text-danger">*</strong></small></label>
+                        <input type="file" name="DOC_IJASAH" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="example-text-input" class="form-control-label">Jenjang Pendidikan <small><strong class="text-danger">*</strong></small></label>
+                        <select class="form-control" name="JENJANG" id="">
+                            <option value=""> - Pilih Jenjang Pendidikan</option>
+                            <option value="SD"> SD</option>
+                            <option value="SMP"> SMP</option>
+                            <option value="SMA"> SMA</option>
+                            <optgroup label="DIPLOMA">
+                                <option value="D1"> D1</option>
+                                <option value="D2"> D2</option>
+                                <option value="D3"> D3</option>
+                                <option value="D4"> D4</option>
+                            </optgroup>
+                            <optgroup label="SARJANA">
+                                <option value="S1"> S1</option>
+                                <option value="S2"> S2</option>
+                                <option value="S3"> S3</option>
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="example-text-input" class="form-control-label">Jurusan <small><strong class="text-danger">*</strong></small></label>
+                        <input class="form-control" type="text" name="JURUSAN">
+                    </div>
+
+                </div>
+                <div class="row p-3">
+                    <div class="col-lg-4">
+                        <button type="button" class="btn btn-sm btn-danger w-100" data-bs-dismiss="modal"><i class="fas fa-times me-2"></i>BATAL</button>
+                    </div>
+                    <div class="col-lg-8">
+                        <button type="submit" class="btn btn-sm btn-success w-100"><i class="fas fa-plus me-2"></i> TAMBAHKAN</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <div class="modal fade" id="modal-doc" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">DOKUMEN SK</h5>
+                <h5 class="modal-title">DOKUMEN</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

@@ -35,6 +35,7 @@
         image_format: 'jpeg',
         jpeg_quality: 100,
         flip_horiz: true,
+        force_flash: true,
         constraints: {
           width: { exact: 750 },
           height: { exact: 1000 }
@@ -219,6 +220,7 @@
   <?php else: ?>
     <script>
       $('#table').DataTable();
+      $('#table2').DataTable();
     </script>
   <?php endif; ?>
 

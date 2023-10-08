@@ -37,7 +37,8 @@ class Kepegawaian extends CI_Controller{
             'pages' => 'Detail Pegawai - ' . $pegawai->nama,
             'pegawai' => $pegawai,
             'jabatan' => $this->db->get('jabatan'),
-            'riwayat' => $riwayat
+            'riwayat' => $riwayat,
+            'pendidikan' => $this->db->get_where('riwayat_pendidikan', ['nip' => $nip])
         ];
 
         $this->load->view('admin/layout/header', $var);
@@ -378,6 +379,51 @@ class Kepegawaian extends CI_Controller{
             $this->session->set_flashdata('sukses', "Riwayat Jabatan Berhasil Di Hapus");
         }else{
             $this->session->set_flashdata('error', "Riwayat Jabatan Gagal Di Hapus");
+        }
+
+        redirect($_SERVER['HTTP_REFERER']);
+    }
+
+    function addRiwayatPendidikan(){
+        $this->load->library('upload', [
+            'upload_path' => './assets/doc/',
+            'allowed_types' => 'png|jpg|jpeg|pdf',
+            'encrypt_name' => TRUE
+        ]);
+        /* Upload DOC_IJASAH */
+        if($this->upload->do_upload('DOC_IJASAH')){
+            $img = $this->upload->data();
+            $DOC_IJASAH = $img['file_name'];
+        }else{
+            $DOC_IJASAH = '';
+        }
+
+        $this->db->insert('riwayat_pendidikan', [
+            'nip' => $this->input->post('nip', TRUE),
+            'DOC_IJASAH' => $DOC_IJASAH,
+            'JENJANG' => $this->input->post('JENJANG', TRUE),
+            'JURUSAN' => $this->input->post('JURUSAN', TRUE),
+        ]);
+        if($this->db->affected_rows() > 0){
+            $this->session->set_flashdata('sukses', "Riwayat Pendidikan Berhasil Di Tambahkan");
+        }else{
+            $this->session->set_flashdata('error', "Riwayat Pendidikan Gagal Di Tambahkan");
+        }
+
+        redirect($_SERVER['HTTP_REFERER']);
+    }
+
+    function removeRiwayatPendidikan($id){
+        $data = $this->db->get_where('riwayat_pendidikan', ['id' => $id])->row();
+        if($data->DOC_IJASAH){
+            @unlink('./assets/doc/' . $data->DOC_IJASAH);
+        }
+
+        $this->db->where('id', $id)->delete('riwayat_pendidikan');
+        if($this->db->affected_rows() > 0){
+            $this->session->set_flashdata('sukses', "Riwayat Pendidikan Berhasil Di Hapus");
+        }else{
+            $this->session->set_flashdata('error', "Riwayat Pendidikan Gagal Di Hapus");
         }
 
         redirect($_SERVER['HTTP_REFERER']);
