@@ -161,6 +161,7 @@
   <?php elseif($this->uri->segment(2) == 'kepegawaian'): ?>
     <script>
       $('#table').DataTable({
+        scrollX: true,
         dom: 'Plfrtip',
         columnDefs: [
               {
@@ -180,7 +181,7 @@
                   targets: [2]
               },{
                   searchPanes: {
-                      show: false
+                      show: true
                   },
                   targets: [4]
               },{
@@ -213,6 +214,16 @@
                       show: false
                   },
                   targets: [10]
+              },{
+                  searchPanes: {
+                      show: false
+                  },
+                  targets: [11]
+              },{
+                  searchPanes: {
+                      show: false
+                  },
+                  targets: [12]
               }
           ]
       });

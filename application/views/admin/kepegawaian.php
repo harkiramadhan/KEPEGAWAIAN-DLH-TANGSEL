@@ -29,7 +29,6 @@
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center" width="1px">NO. NPWP</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center" width="1px">NO. KTP</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center" width="1px">HONOR</th>
-								<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center" width="1px">FOTO</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -44,9 +43,9 @@
 									<div class="d-flex px-2 py-1">
 										<div>
 											<?php if($row->FOTO): ?>
-												<img src="<?= base_url('assets/doc/' . $row->FOTO) ?>" class="avatar avatar-sm me-3" alt="user1">
+												<img src="<?= base_url('assets/doc/' . $row->FOTO) ?>" class="avatar avatar-sm me-3" alt="<?= $row->nama ?>">
 											<?php else: ?>
-												<img src="<?= base_url('assets/img/team-2.jpg') ?>" class="avatar avatar-sm me-3" alt="user1">
+												<img src="<?= base_url('assets/img/placeholder-image-png.png') ?>" class="avatar avatar-sm me-3" alt="<?= $row->nama ?>">
 											<?php endif; ?>
 										</div>
 										<div class="d-flex flex-column justify-content-center">
@@ -74,9 +73,6 @@
 								</td>
                                 <td class="align-middle text-center text-sm">
 									<button class="btn btn-sm <?= ($row->DOC_HONOR) ? 'btn-success' : 'btn-danger' ?> w-100 mb-0"><i class="fas <?= ($row->DOC_HONOR) ? 'fa-check' : 'fa-times' ?>"></i></button>
-								</td>
-								<td class="align-middle text-center text-sm">
-									<button class="btn btn-sm <?= ($row->FOTO) ? 'btn-success' : 'btn-danger' ?> w-100 mb-0"><i class="fas <?= ($row->FOTO) ? 'fa-check' : 'fa-times' ?>"></i></button>
 								</td>
 							</tr>
                             <?php } ?>
