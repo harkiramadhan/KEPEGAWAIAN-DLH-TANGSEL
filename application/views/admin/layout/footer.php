@@ -25,6 +25,7 @@
   <script src="https://cdn.datatables.net/searchpanes/2.2.0/js/dataTables.searchPanes.min.js"></script>
   <script src="https://cdn.datatables.net/select/1.7.0/js/dataTables.select.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <script src="https://cdn.datatables.net/fixedcolumns/4.3.0/js/dataTables.fixedColumns.min.js"></script>
 
   <?php if($this->uri->segment(2) == 'foto'): ?>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.js"></script>
@@ -162,6 +163,9 @@
     <script>
       $('#table').DataTable({
         scrollX: true,
+        fixedColumns: {
+          left: 5
+      },
         dom: 'Plfrtip',
         columnDefs: [
               {

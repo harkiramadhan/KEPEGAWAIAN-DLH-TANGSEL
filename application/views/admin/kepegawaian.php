@@ -17,7 +17,7 @@
 						<thead>
 							<tr>
 								<th class="text-secondary opacity-7" width="1px"></th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="1px">NO</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="1px"></th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="1px">NIP</th>
 								<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
 								<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="1px">Jabatan</th>
@@ -37,7 +37,7 @@
 								<td class="align-middle">
 									<a href="<?= site_url('admin/kepegawaian/' . $row->nip . '/detail') ?>" class="btn btn-sm btn-info w-100 mb-0" data-toggle="tooltip" data-original-title="Edit user"> <i class="fas fa-eye"></i> </a>
 								</td>
-                                <td class="text-center"><?= $no++ ?>. </td>
+                                <td class="text-center"></td>
                                 <td class="text-center"><?= $row->nip ?></td>
 								<td>
 									<div class="d-flex px-2 py-1">
