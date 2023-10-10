@@ -16,6 +16,7 @@
 					<table class="table align-items-center mb-0" id="table">
 						<thead>
 							<tr>
+								<th class="text-secondary opacity-7" width="1px"></th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="1px">NO</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="1px">NIP</th>
 								<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
@@ -27,16 +28,16 @@
 								<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center" width="1px">NO. BPJS NAKER</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center" width="1px">NO. NPWP</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center" width="1px">NO. KTP</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center" width="1px">SK</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center" width="1px">IJASAH</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center" width="1px">HONOR</th>
 								<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center" width="1px">FOTO</th>
-								<th class="text-secondary opacity-7" width="1px"></th>
 							</tr>
 						</thead>
 						<tbody>
                             <?php $no=1; foreach($pegawai->result() as $row){ ?>
 							<tr>
+								<td class="align-middle">
+									<a href="<?= site_url('admin/kepegawaian/' . $row->nip . '/detail') ?>" class="btn btn-sm btn-info w-100 mb-0" data-toggle="tooltip" data-original-title="Edit user"> <i class="fas fa-eye"></i> </a>
+								</td>
                                 <td class="text-center"><?= $no++ ?>. </td>
                                 <td class="text-center"><?= $row->nip ?></td>
 								<td>
@@ -72,19 +73,10 @@
 									<button class="btn btn-sm <?= ($row->DOC_KTP) ? 'btn-success' : 'btn-danger' ?> w-100 mb-0"><i class="fas <?= ($row->DOC_KTP) ? 'fa-check' : 'fa-times' ?> me-2"></i><?= $row->NOKTP ?></button>
 								</td>
                                 <td class="align-middle text-center text-sm">
-									<button class="btn btn-sm <?= ($row->DOC_SK) ? 'btn-success' : 'btn-danger' ?> w-100 mb-0"><i class="fas <?= ($row->DOC_SK) ? 'fa-check' : 'fa-times' ?>"></i></button>
-								</td>
-                                <td class="align-middle text-center text-sm">
-									<button class="btn btn-sm <?= ($row->DOC_IJASAH) ? 'btn-success' : 'btn-danger' ?> w-100 mb-0"><i class="fas <?= ($row->DOC_IJASAH) ? 'fa-check' : 'fa-times' ?>"></i></button>
-								</td>
-                                <td class="align-middle text-center text-sm">
 									<button class="btn btn-sm <?= ($row->DOC_HONOR) ? 'btn-success' : 'btn-danger' ?> w-100 mb-0"><i class="fas <?= ($row->DOC_HONOR) ? 'fa-check' : 'fa-times' ?>"></i></button>
 								</td>
 								<td class="align-middle text-center text-sm">
 									<button class="btn btn-sm <?= ($row->FOTO) ? 'btn-success' : 'btn-danger' ?> w-100 mb-0"><i class="fas <?= ($row->FOTO) ? 'fa-check' : 'fa-times' ?>"></i></button>
-								</td>
-								<td class="align-middle">
-									<a href="<?= site_url('admin/kepegawaian/' . $row->nip . '/detail') ?>" class="btn btn-sm btn-info w-100 mb-0" data-toggle="tooltip" data-original-title="Edit user"> <i class="fas fa-eye"></i> </a>
 								</td>
 							</tr>
                             <?php } ?>
