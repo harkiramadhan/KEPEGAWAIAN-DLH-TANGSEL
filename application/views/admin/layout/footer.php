@@ -164,7 +164,7 @@
       $('#table').DataTable({
         scrollX: true,
         fixedColumns: {
-          left: 5
+          left: 3
       },
         dom: 'Plfrtip',
         columnDefs: [
@@ -180,12 +180,17 @@
                   targets: [1]
               },{
                   searchPanes: {
-                      show: false
+                      show: true
                   },
                   targets: [2]
               },{
                   searchPanes: {
-                      show: true
+                      show: false
+                  },
+                  targets: [3]
+              },{
+                  searchPanes: {
+                      show: false
                   },
                   targets: [4]
               },{
@@ -218,16 +223,6 @@
                       show: false
                   },
                   targets: [10]
-              },{
-                  searchPanes: {
-                      show: false
-                  },
-                  targets: [11]
-              },{
-                  searchPanes: {
-                      show: false
-                  },
-                  targets: [12]
               }
           ]
       });
