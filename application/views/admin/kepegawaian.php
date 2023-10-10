@@ -46,7 +46,7 @@
 										</div>
 										<div class="d-flex flex-column justify-content-center">
 											<h6 class="mb-0 text-sm"><?= $row->nama ?></h6>
-											<p class="text-xs text-secondary mb-0">NIP : <?= $row->nip ?></p>
+											<p class="text-xs text-secondary mb-0">NIP : <strong><?= $row->nip ?></strong></p>
 										</div>
 									</div>
 								</td>
