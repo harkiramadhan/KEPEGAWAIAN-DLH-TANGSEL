@@ -162,7 +162,6 @@
   <?php elseif($this->uri->segment(2) == 'kepegawaian'): ?>
     <script>
       $('#table').DataTable({
-        scrollX: true,
         fixedColumns: {
           left: 3
       },
@@ -213,16 +212,6 @@
                       show: false
                   },
                   targets: [8]
-              },{
-                  searchPanes: {
-                      show: false
-                  },
-                  targets: [9]
-              },{
-                  searchPanes: {
-                      show: false
-                  },
-                  targets: [10]
               }
           ]
       });

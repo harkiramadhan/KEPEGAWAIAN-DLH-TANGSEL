@@ -19,8 +19,6 @@
 								<th class="text-secondary opacity-7" width="1px"></th>
 								<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
 								<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="1px">Jabatan</th>
-								<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" width="1px">Honor</th>
-								<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Email</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center" width="1px">NO. REK</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center" width="1px">NO. BPJS KES</th>
 								<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center" width="1px">NO. BPJS NAKER</th>
@@ -51,8 +49,6 @@
 									</div>
 								</td>
 								<td><?= $row->jabatan ?></td>
-								<td><?= ($row->honor_pg) ? number_format($row->honor_pg,0,',','.') : '' ?></td>
-								<td><?= $row->email ?></td>
 								<td class="align-middle text-center text-sm">
                                     <button class="btn btn-sm <?= ($row->DOC_REK) ? 'btn-success' : 'btn-danger' ?> w-100 mb-0"><i class="fas <?= ($row->DOC_REK) ? 'fa-check' : 'fa-times' ?> me-2"></i> <?= $row->NOREK ?></button>
 								</td>

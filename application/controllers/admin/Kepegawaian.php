@@ -185,7 +185,7 @@ class Kepegawaian extends CI_Controller{
                 'FOTO' => $FOTO,
             ]);
             if($this->db->affected_rows() > 0){
-                $this->session->set_flashdata('success', "Data Berhasil Di Tambahkan");
+                $this->session->set_flashdata('sukses', "Data Berhasil Di Tambahkan");
             }else{
                 $this->session->set_flashdata('error', "Data Gagal Di Tambahkan");
             }
@@ -330,7 +330,7 @@ class Kepegawaian extends CI_Controller{
             'FOTO' => $FOTO,
         ]);
         if($this->db->affected_rows() > 0){
-            $this->session->set_flashdata('success', "Data Berhasil Di Simpan");
+            $this->session->set_flashdata('sukses', "Data Berhasil Di Simpan");
         }else{
             $this->session->set_flashdata('error', "Data Gagal Di Simpan");
         }

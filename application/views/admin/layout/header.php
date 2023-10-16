@@ -36,6 +36,7 @@
 		<link rel="stylesheet" href="https://cdn.datatables.net/searchpanes/2.2.0/css/searchPanes.dataTables.min.css">
 		<link rel="stylesheet" href="https://cdn.datatables.net/select/1.7.0/css/select.dataTables.min.css">
 		<link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/4.3.0/css/fixedColumns.dataTables.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 		<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 	</head>
@@ -97,6 +98,27 @@
 		<main class="main-content position-relative border-radius-lg ">
 			<!-- Navbar -->
 			<nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
+				<?php if($this->session->flashdata('sukses')): ?>
+					<div class="alert alert-success alert-dismissible rounded rounded-3 fade w-100 zindex-fixed show position-absolute border-0 text-white d-flex justify-content-between pe-3 align-items-center" role="alert" style="top: 15px;">
+						<i class="fas fa-check-circle fa-lg me-3"></i>
+						<div class="">
+							<p class="font-weight-bold mb-0">Berhasil</p>
+							<p class="font-weight-normal mb-0 font-12"><?= @$this->session->flashdata('sukses') ?></p>
+						</div>
+						<button type="button" class="btn btn-outline-light mb-0 ms-auto" data-bs-dismiss="alert" aria-label="Close"><i class="fas fa-times"></i></button>
+					</div>
+				<?php endif; ?>
+
+				<?php if($this->session->flashdata('error')): ?>
+					<div class="alert alert-danger alert-dismissible rounded rounded-3 fade w-100 zindex-fixed show position-absolute border-0 text-white d-flex justify-content-between pe-3 align-items-center" role="alert" style="top: 15px;">
+						<i class="fas fa-times-circle fa-lg me-3"></i>
+						<div class="">
+							<p class="font-weight-bold mb-0">Gagal</p>
+							<p class="font-weight-normal mb-0 font-12"><?= $this->session->flashdata('error') ?></p>
+						</div>
+						<button type="button" class="btn btn-outline-light mb-0 ms-auto" data-bs-dismiss="alert" aria-label="Close"><i class="fas fa-times"></i></button>
+					</div>
+				<?php endif; ?>
 				<div class="container-fluid py-1 px-3">
 					<nav aria-label="breadcrumb">
 						<ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
@@ -108,16 +130,22 @@
 						<h6 class="font-weight-bolder text-white mb-0"><?= $pages ?></h6>
 					</nav>
 					<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-						<div class="ms-md-auto pe-md-3 d-flex align-items-center">
-							<p></p>
-						</div>
-						<ul class="navbar-nav  justify-content-end">
+				
+						<ul class="ms-md-auto navbar-nav  justify-content-end">
+							<!-- Responsive Mobile Humber Menu -->
+							<li class="nav-item d-xl-none ps-3 d-flex align-items-center me-4">
+								<a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
+									<div class="sidenav-toggler-inner">
+									<i class="sidenav-toggler-line bg-white"></i>
+									<i class="sidenav-toggler-line bg-white"></i>
+									<i class="sidenav-toggler-line bg-white"></i>
+									</div>
+								</a>
+							</li>
 							<li class="nav-item d-flex align-items-center">
-								<a href="
-																		<?= site_url('auth/logout') ?>" class="nav-link text-white font-weight-bold px-0">
-									<i class="fa fa-user me-sm-1"></i>
-									<span class="d-sm-inline d-none">
-										<strong>LOGOUT </span>
+								<a href="<?= site_url('auth/logout') ?>" class="nav-link text-white font-weight-bold px-0">
+									<i class="fa fa-right-from-bracket me-sm-1"></i>
+									<span class="d-sm-inline d-none"><strong>LOGOUT </span>
 								</a>
 							</li>
 						</ul>
