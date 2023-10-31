@@ -44,11 +44,11 @@
 								<td>
 									<div class="d-flex px-2 py-1">
 										<div>
-											<?php //if($row->FOTO): ?>
-												<!-- <img src="<?= base_url('assets/doc/' . $row->FOTO) ?>" class="avatar avatar-sm me-3" alt="<?= $row->nama ?>"> -->
-											<?php //else: ?>
+											<?php if($row->FOTO): ?>
+												<img src="<?= base_url('assets/doc/' . $row->FOTO) ?>" class="avatar avatar-sm me-3" alt="<?= $row->nama ?>">
+											<?php else: ?>
 												<img src="<?= base_url('assets/img/placeholder-image-png.png') ?>" class="avatar avatar-sm me-3" alt="<?= $row->nama ?>">
-											<?php //endif; ?>
+											<?php endif; ?>
 										</div>
 										<div class="d-flex flex-column justify-content-center">
 											<h6 class="mb-0 text-sm"><?= $row->nama ?></h6>

@@ -165,7 +165,7 @@
         fixedColumns: {
           left: 2
         },
-        dom: 'rtip',
+        dom: 'lrtip',
       });
 
       $('#search-data').on( 'keyup', function () {
