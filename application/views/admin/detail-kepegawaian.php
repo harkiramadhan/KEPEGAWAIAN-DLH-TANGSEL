@@ -1,4 +1,4 @@
-<form action="<?= site_url('admin/kepegawaian/update/' . $pegawai->nip) ?>" method="post" enctype="multipart/form-data">
+<form action="<?= site_url('admin/kepegawaian/update/' . $pegawai->id) ?>" method="post" enctype="multipart/form-data">
     <div class="row">
         <div class="col-md-9 mt-3">
             <div class="card">
@@ -13,7 +13,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label">NIP</label>
-                                <input class="form-control" type="number" name="nip" value="<?= $pegawai->nip ?>" required>
+                                <input class="form-control" type="text" name="nip" value="<?= $pegawai->nip ?>" required>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -22,13 +22,26 @@
                                 <input class="form-control" type="text" name="nama" value="<?= $pegawai->nama ?>" >
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
+                            <label class="ms-0">Status <small><strong class="text-danger">*</strong></small></label>
+                            <div class="d-flex">
+                                <div class="form-check mb-0">
+                                    <input class="form-check-input" type="radio" id="customRadio1" value="1" name="status" <?= ($pegawai->status == 1) ? 'checked' : '' ?> >
+                                    <label class="custom-control-label font-weight-normal" for="customRadio1">AKTIF</label>
+                                </div>
+                                <div class="form-check ms-3">
+                                    <input class="form-check-input" type="radio" id="customRadio2" value="0" name="status" <?= ($pegawai->status == 0) ? 'checked' : '' ?> >
+                                    <label class="custom-control-label font-weight-normal" for="customRadio2">NON AKTIF</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label">Tempat Lahir <small><strong class="text-danger">*</strong></small></label>
                                 <input class="form-control" type="text" name="kd_lokasi_lahir" value="<?= $pegawai->kd_lokasi_lahir ?>" >
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label">Tanggal Lahir <small><strong class="text-danger">*</strong></small></label>
                                 <input class="form-control" type="date" name="tgl_lahir1" value="<?= $pegawai->tgl_lahir1 ?>" >
@@ -68,7 +81,7 @@
 
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label">Nomor KTP <small><strong class="text-danger">*</strong></small></label>
-                                <input class="form-control" type="number" name="NOKTP" value="<?= $pegawai->NOKTP ?>" >
+                                <input class="form-control" type="text" name="NOKTP" value="<?= $pegawai->NOKTP ?>" >
                             </div>
 
                             <?php if($pegawai->DOC_KTP): ?>
@@ -89,7 +102,7 @@
 
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label">Nomor Rekening <small><strong class="text-danger">*</strong></small></label>
-                                <input class="form-control" type="number" name="NOREK" value="<?= $pegawai->NOREK ?>" >
+                                <input class="form-control" type="text" name="NOREK" value="<?= $pegawai->NOREK ?>" >
                             </div>
 
                             <?php if($pegawai->DOC_REK): ?>
@@ -110,7 +123,7 @@
 
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label">Nomor BPJS KESEHATAN<small><strong class="text-danger">*</strong></small></label>
-                                <input class="form-control" type="number" name="NOBPJS" value="<?= $pegawai->NOBPJS ?>" >
+                                <input class="form-control" type="text" name="NOBPJS" value="<?= $pegawai->NOBPJS ?>" >
                             </div>
 
                             <?php if($pegawai->DOC_BPJS): ?>
@@ -131,7 +144,7 @@
 
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label">Nomor BPJS KETENAGAKERJAAN<small><strong class="text-danger">*</strong></small></label>
-                                <input class="form-control" type="number" name="NOBPJSNAKER" value="<?= $pegawai->NOBPJSNAKER ?>" >
+                                <input class="form-control" type="text" name="NOBPJSNAKER" value="<?= $pegawai->NOBPJSNAKER ?>" >
                             </div>
 
                             <?php if($pegawai->DOC_BPJSNAKER): ?>
@@ -152,7 +165,7 @@
 
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label">Nomor NPWP <small><strong class="text-danger">*) PNG/JPG/JPEG</strong></small></label>
-                                <input class="form-control" type="number" name="NPWP" value="<?= $pegawai->NPWP ?>" >
+                                <input class="form-control" type="text" name="NPWP" value="<?= $pegawai->NPWP ?>" >
                             </div>
 
                             <?php if($pegawai->DOC_NPWP): ?>
@@ -289,7 +302,7 @@
                 </button>
             </div>
             <form action="<?= site_url('admin/kepegawaian/addRiwayatJabatan') ?>" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="nip" value="<?= $pegawai->nip ?>">
+                <input type="hidden" name="id_pegawai" value="<?= $pegawai->id ?>">
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="example-text-input" class="form-control-label">Jabatan <small><strong class="text-danger">*</strong></small></label>
@@ -340,7 +353,7 @@
                 </button>
             </div>
             <form action="<?= site_url('admin/kepegawaian/addRiwayatPendidikan') ?>" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="nip" value="<?= $pegawai->nip ?>">
+                <input type="hidden" name="id_pegawai" value="<?= $pegawai->id ?>">
                 <div class="modal-body">
 
                     <div class="form-group">

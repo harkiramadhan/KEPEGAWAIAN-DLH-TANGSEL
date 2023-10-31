@@ -13,7 +13,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label">NIP</label>
-                                <input class="form-control <?= ($this->session->flashdata('error_nip') == TRUE) ? 'is-invalid' : '' ?>" type="number" name="nip" required>
+                                <input class="form-control <?= ($this->session->flashdata('error_nip') == TRUE) ? 'is-invalid' : '' ?>" type="text" name="nip" required>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -68,7 +68,7 @@
 
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label">Nomor KTP <small><strong class="text-danger">*</strong></small></label>
-                                <input class="form-control" type="number" name="NOKTP" value="<?= $this->session->flashdata('NOKTP') ?>">
+                                <input class="form-control" type="text" name="NOKTP" value="<?= $this->session->flashdata('NOKTP') ?>">
                             </div>
 
                             <img id="image-preview-KTP" alt="image preview" class="rounded border mb-3 d-none" src="#" style="width: 100%;">
@@ -84,7 +84,7 @@
 
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label">Nomor Rekening <small><strong class="text-danger">*</strong></small></label>
-                                <input class="form-control" type="number" name="NOREK" value="<?= $this->session->flashdata('NOREK') ?>">
+                                <input class="form-control" type="text" name="NOREK" value="<?= $this->session->flashdata('NOREK') ?>">
                             </div>
 
                             <img id="image-preview-REK" alt="image preview" class="rounded border mb-3 d-none" src="#" style="width: 100%;">
@@ -100,7 +100,7 @@
 
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label">Nomor BPJS KESEHATAN<small><strong class="text-danger">*</strong></small></label>
-                                <input class="form-control" type="number" name="NOBPJS" value="<?= $this->session->flashdata('NOBPJS') ?>">
+                                <input class="form-control" type="text" name="NOBPJS" value="<?= $this->session->flashdata('NOBPJS') ?>">
                             </div>
 
                             <img id="image-preview-BPJS" alt="image preview" class="rounded border mb-3 d-none" src="#" style="width: 100%;">
@@ -116,7 +116,7 @@
 
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label">Nomor BPJS KETENAGAKERJAAN<small><strong class="text-danger">*</strong></small></label>
-                                <input class="form-control" type="number" name="NOBPJSNAKER" value="<?= $this->session->flashdata('NOBPJSNAKER') ?>">
+                                <input class="form-control" type="text" name="NOBPJSNAKER" value="<?= $this->session->flashdata('NOBPJSNAKER') ?>">
                             </div>
 
                             <img id="image-preview-BPJS-Naker" alt="image preview" class="rounded border mb-3 d-none" src="#" style="width: 100%;">
@@ -132,7 +132,7 @@
 
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label">Nomor NPWP <small><strong class="text-danger">*) PNG/JPG/JPEG</strong></small></label>
-                                <input class="form-control" type="number" name="NPWP" value="<?= $this->session->flashdata('NPWP') ?>">
+                                <input class="form-control" type="text" name="NPWP" value="<?= $this->session->flashdata('NPWP') ?>">
                             </div>
 
                             <img id="image-preview-NPWP" alt="image preview" class="rounded border mb-3 d-none" src="#" style="width: 100%;">

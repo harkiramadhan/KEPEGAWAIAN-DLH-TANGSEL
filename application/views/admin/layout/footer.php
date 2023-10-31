@@ -35,8 +35,8 @@
         height: 1000,
         image_format: 'jpeg',
         jpeg_quality: 100,
-        flip_horiz: true,
-        force_flash: true,
+        // flip_horiz: true,
+        // force_flash: true,
         constraints: {
           width: { exact: 750 },
           height: { exact: 1000 }
@@ -47,7 +47,7 @@
       $('#upload').on('submit', function (event) {
         event.preventDefault();
         var image = '';
-        var nip = $('#nip').val();
+        var id = $('#id').val();
         Webcam.snap( function(data_uri) {
           image = data_uri;
         });
@@ -55,7 +55,7 @@
           url: '<?php echo site_url("admin/foto/save");?>',
           type: 'POST',
           dataType: 'json',
-          data: {nip: nip, image:image},
+          data: {id: id, image:image},
         }).done(function(data) {
           if (data === 1) {
             alert('Foto Berhasil Di Upload');
@@ -161,59 +161,15 @@
 
   <?php elseif($this->uri->segment(2) == 'kepegawaian'): ?>
     <script>
-      $('#table').DataTable({
+      var table = $('#table').DataTable({
         fixedColumns: {
-          left: 3
-      },
-        dom: 'Plfrtip',
-        columnDefs: [
-              {
-                  searchPanes: {
-                      show: false
-                  },
-                  targets: [0]
-              },{
-                  searchPanes: {
-                      show: false
-                  },
-                  targets: [1]
-              },{
-                  searchPanes: {
-                      show: true
-                  },
-                  targets: [2]
-              },{
-                  searchPanes: {
-                      show: false
-                  },
-                  targets: [3]
-              },{
-                  searchPanes: {
-                      show: false
-                  },
-                  targets: [4]
-              },{
-                  searchPanes: {
-                      show: false
-                  },
-                  targets: [5]
-              },{
-                  searchPanes: {
-                      show: false
-                  },
-                  targets: [6]
-              },{
-                  searchPanes: {
-                      show: false
-                  },
-                  targets: [7]
-              },{
-                  searchPanes: {
-                      show: false
-                  },
-                  targets: [8]
-              }
-          ]
+          left: 2
+        },
+        dom: 'rtip',
+      });
+
+      $('#search-data').on( 'keyup', function () {
+        table.columns(1).search( this.value ).draw();
       });
     </script>
   <?php else: ?>

@@ -1,4 +1,9 @@
 <?php
+
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
 class Kepegawaian extends CI_Controller{
     function __construct(){
         parent::__construct();
@@ -10,10 +15,12 @@ class Kepegawaian extends CI_Controller{
     }
 
     function index(){
-        $pegawai = $this->db->select('mp.*, j.jabatan, mjp.HONOR AS honor_pg')
+        $pegawai = $this->db->select('mp.*, j.jabatan, mjp.HONOR AS honor_pg, rp.jenjang, rp.jurusan')
                             ->from('riwayat_data_utama mp')
-                            ->join('(SELECT nip, MAX(tanggal) AS max_tanggal, id FROM mutasi_jabatan GROUP BY nip) AS mutasi_terbaru', 'mp.nip = mutasi_terbaru.nip', 'left')
-                            ->join('mutasi_jabatan mjp', 'mp.nip = mjp.nip AND mutasi_terbaru.max_tanggal = mjp.tanggal', 'left')
+                            ->join('(SELECT id_pegawai, MAX(tanggal) AS max_tanggal, id FROM mutasi_jabatan GROUP BY id_pegawai) AS mutasi_terbaru', 'mp.id = mutasi_terbaru.id_pegawai', 'left')
+                            ->join('(SELECT id_pegawai, MAX(id) AS max_id, id, jenjang, jurusan FROM riwayat_pendidikan GROUP BY id_pegawai) AS mutasi_terbaru2', 'mp.id = mutasi_terbaru2.id_pegawai', 'left')
+                            ->join('mutasi_jabatan mjp', 'mp.id = mjp.id_pegawai AND mutasi_terbaru.max_tanggal = mjp.tanggal', 'left')
+                            ->join('riwayat_pendidikan rp', 'mp.id = rp.id_pegawai AND mutasi_terbaru2.max_id = rp.id', 'left')
                             ->join('jabatan j', 'mjp.id_jabatan = j.id', 'left')->get();
         $var = [
             'title' => 'Kepegawaian - KEPEGAWAIAN DLH TANGSEL',
@@ -26,19 +33,19 @@ class Kepegawaian extends CI_Controller{
         $this->load->view('admin/layout/footer', $var);
     }
 
-    function detail($nip){
-        $pegawai = $this->db->get_where('riwayat_data_utama', ['nip' => $nip])->row();
+    function detail($id){
+        $pegawai = $this->db->get_where('riwayat_data_utama', ['id' => $id])->row();
         $riwayat = $this->db->select('mj.*, j.jabatan')
                             ->from('mutasi_jabatan mj')
                             ->join('jabatan j', 'mj.id_jabatan = j.id')
-                            ->where(['mj.nip' => $nip])->order_by('mj.tanggal', "DESC")->get();
+                            ->where(['mj.id_pegawai' => $id])->order_by('mj.tanggal', "DESC")->get();
         $var = [
             'title' => 'Detail Kepegawaian - KEPEGAWAIAN DLH TANGSEL',
             'pages' => 'Detail Pegawai - ' . $pegawai->nama,
             'pegawai' => $pegawai,
             'jabatan' => $this->db->get('jabatan'),
             'riwayat' => $riwayat,
-            'pendidikan' => $this->db->get_where('riwayat_pendidikan', ['nip' => $nip])
+            'pendidikan' => $this->db->get_where('riwayat_pendidikan', ['id_pegawai' => $id])
         ];
 
         $this->load->view('admin/layout/header', $var);
@@ -195,8 +202,8 @@ class Kepegawaian extends CI_Controller{
 
     }
 
-    function update($nip){
-        $pegawai = $this->db->get_where('riwayat_data_utama', ['nip' => $nip])->row();
+    function update($id){
+        $pegawai = $this->db->get_where('riwayat_data_utama', ['id' => $id])->row();
 
         $this->load->library('upload', [
             'upload_path' => './assets/doc/',
@@ -304,7 +311,8 @@ class Kepegawaian extends CI_Controller{
         }
 
 
-        $this->db->where('nip', $nip)->update('riwayat_data_utama', [
+        $this->db->where('id', $id)->update('riwayat_data_utama', [
+            'status' => $this->input->post('status', TRUE),
             'nip' => $this->input->post('nip', TRUE),
             'nama' => $this->input->post('nama', TRUE),
             'jenis_kelamin' => $this->input->post('jenis_kelamin', TRUE),
@@ -353,6 +361,7 @@ class Kepegawaian extends CI_Controller{
         }
 
         $this->db->insert('mutasi_jabatan', [
+            'id_pegawai' => $this->input->post('id_pegawai', TRUE),
             'nip' => $this->input->post('nip', TRUE),
             'id_jabatan' => $this->input->post('id_jabatan', TRUE),
             'DOC_SK' => $DOC_SK,
@@ -399,6 +408,7 @@ class Kepegawaian extends CI_Controller{
         }
 
         $this->db->insert('riwayat_pendidikan', [
+            'id_pegawai' => $this->input->post('id_pegawai', TRUE),
             'nip' => $this->input->post('nip', TRUE),
             'DOC_IJASAH' => $DOC_IJASAH,
             'JENJANG' => $this->input->post('JENJANG', TRUE),
@@ -427,5 +437,78 @@ class Kepegawaian extends CI_Controller{
         }
 
         redirect($_SERVER['HTTP_REFERER']);
+    }
+
+    function export(){
+        $pegawai = $this->db->select('mp.*, j.jabatan, mjp.HONOR AS honor_pg, rp.jenjang, rp.jurusan')
+                            ->from('riwayat_data_utama mp')
+                            ->join('(SELECT id_pegawai, MAX(tanggal) AS max_tanggal, id FROM mutasi_jabatan GROUP BY id_pegawai) AS mutasi_terbaru', 'mp.id = mutasi_terbaru.id_pegawai', 'left')
+                            ->join('(SELECT id_pegawai, MAX(id) AS max_id, id, jenjang, jurusan FROM riwayat_pendidikan GROUP BY id_pegawai) AS mutasi_terbaru2', 'mp.id = mutasi_terbaru2.id_pegawai', 'left')
+                            ->join('mutasi_jabatan mjp', 'mp.id = mjp.id_pegawai AND mutasi_terbaru.max_tanggal = mjp.tanggal', 'left')
+                            ->join('riwayat_pendidikan rp', 'mp.id = rp.id_pegawai AND mutasi_terbaru2.max_id = rp.id', 'left')
+                            ->join('jabatan j', 'mjp.id_jabatan = j.id', 'left')
+                            ->where([
+                                'mp.status' => 1
+                            ])->get();
+        $data['pegawai'] = $pegawai;
+        $htmlString = $this->load->view('exportPegawai', $data, TRUE);
+
+        $reader = new \PhpOffice\PhpSpreadsheet\Reader\Html();
+        $spreadsheet = $reader->loadFromString($htmlString);
+        $activeWorksheet = $spreadsheet->getActiveSheet();
+
+        $activeWorksheet->getColumnDimension('B')->setWidth(20);
+        $activeWorksheet->getColumnDimension('C')->setAutoSize(TRUE);
+        $activeWorksheet->getColumnDimension('E')->setAutoSize(TRUE);
+        $activeWorksheet->getColumnDimension('F')->setWidth(15);
+        $activeWorksheet->getColumnDimension('G')->setWidth(15);
+        $activeWorksheet->getColumnDimension('H')->setAutoSize(TRUE);
+        $activeWorksheet->getColumnDimension('I')->setAutoSize(TRUE);
+        $activeWorksheet->getColumnDimension('J')->setAutoSize(TRUE);
+        $activeWorksheet->getColumnDimension('K')->setAutoSize(TRUE);
+        $activeWorksheet->getColumnDimension('L')->setAutoSize(TRUE);
+        $activeWorksheet->getColumnDimension('M')->setAutoSize(TRUE);
+        $activeWorksheet->getColumnDimension('N')->setAutoSize(TRUE);
+        $activeWorksheet->getColumnDimension('O')->setAutoSize(TRUE);
+        $activeWorksheet->getColumnDimension('P')->setAutoSize(TRUE);
+        
+        $activeWorksheet->getStyle('A4:P5')->applyFromArray([
+            'font' => ['bold' => true, 'size' => 12, 'name' => 'Calibri'],
+            'alignment' => [
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+            ],
+            'borders' => [
+                'bottom' => [
+                    'borderStyle' => 'hair', 
+                    'color' => ['argb' => ' 0F0F0F']
+                ],'top' => [
+                    'borderStyle' => 'hair', 
+                    'color' => ['argb' => ' 0F0F0F']
+                ],'right' => [
+                    'borderStyle' => 'hair', 
+                    'color' => ['argb' => ' 0F0F0F']
+                ],'left' => [
+                    'borderStyle' => 'hair', 
+                    'color' => ['argb' => ' 0F0F0F']
+                ]
+            ]
+        ]);
+
+        $activeWorksheet->freezePane('F6');
+        $activeWorksheet->getStyle('B')->getNumberFormat()->setFormatCode('#');
+        $activeWorksheet->getStyle('L')->getNumberFormat()->setFormatCode('#');
+        $activeWorksheet->getStyle('M')->getNumberFormat()->setFormatCode('#');
+        $activeWorksheet->getStyle('N')->getNumberFormat()->setFormatCode('#');
+        $activeWorksheet->getStyle('O')->getNumberFormat()->setFormatCode('#');
+        $activeWorksheet->getStyle('P')->getNumberFormat()->setFormatCode('#');
+
+        $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Xlsx');
+
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="DAFTAR PEGAWAI DINAS LINGKUNGAN HIDUP KOTA TANGERANG SELATAN.xlsx"');
+        header('Cache-Control: max-age=0');
+        $writer->save('php://output');
+
     }
 }
