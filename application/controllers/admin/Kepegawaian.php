@@ -446,10 +446,7 @@ class Kepegawaian extends CI_Controller{
                             ->join('(SELECT id_pegawai, MAX(id) AS max_id, id, jenjang, jurusan FROM riwayat_pendidikan GROUP BY id_pegawai) AS mutasi_terbaru2', 'mp.id = mutasi_terbaru2.id_pegawai', 'left')
                             ->join('mutasi_jabatan mjp', 'mp.id = mjp.id_pegawai AND mutasi_terbaru.max_tanggal = mjp.tanggal', 'left')
                             ->join('riwayat_pendidikan rp', 'mp.id = rp.id_pegawai AND mutasi_terbaru2.max_id = rp.id', 'left')
-                            ->join('jabatan j', 'mjp.id_jabatan = j.id', 'left')
-                            ->where([
-                                'mp.status' => 1
-                            ])->get();
+                            ->join('jabatan j', 'mjp.id_jabatan = j.id', 'left')->get();
         $data['pegawai'] = $pegawai;
         $htmlString = $this->load->view('exportPegawai', $data, TRUE);
 
@@ -472,7 +469,7 @@ class Kepegawaian extends CI_Controller{
         $activeWorksheet->getColumnDimension('O')->setAutoSize(TRUE);
         $activeWorksheet->getColumnDimension('P')->setAutoSize(TRUE);
         
-        $activeWorksheet->getStyle('A4:P5')->applyFromArray([
+        $activeWorksheet->getStyle('A4:Q5')->applyFromArray([
             'font' => ['bold' => true, 'size' => 12, 'name' => 'Calibri'],
             'alignment' => [
                 'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
@@ -509,6 +506,5 @@ class Kepegawaian extends CI_Controller{
         header('Content-Disposition: attachment;filename="DAFTAR PEGAWAI DINAS LINGKUNGAN HIDUP KOTA TANGERANG SELATAN.xlsx"');
         header('Cache-Control: max-age=0');
         $writer->save('php://output');
-
     }
 }

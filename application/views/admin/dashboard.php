@@ -1,5 +1,5 @@
 <div class="row">
-	<div class="col-xl-6 col-sm-6 mb-xl-0 mb-4">
+	<div class="col-lg-3 mb-4">
 		<div class="card">
 			<div class="card-body p-3">
 				<div class="row mb-3">
@@ -11,14 +11,55 @@
 					</div>
 					<div class="col-4 text-end">
 						<div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
-							<i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
+							<i class="fas fa-users text-lg opacity-10" aria-hidden="true"></i>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="col-xl-6 col-sm-6 mb-xl-0 mb-4">
+
+	<div class="col-lg-3 mb-4">
+		<div class="card">
+			<div class="card-body p-3">
+				<div class="row mb-3">
+					<div class="col-8">
+						<div class="numbers">
+							<p class="text-sm mb-0 text-uppercase font-weight-bold">Total Pegawai Aktif</p>
+							<h5 class="font-weight-bolder"> <?= $pegawai_aktif ?>  Orang</h5>
+						</div>
+					</div>
+					<div class="col-4 text-end">
+						<div class="icon icon-shape bg-success shadow-success text-center rounded-circle">
+							<i class="fas fa-user-shield text-lg opacity-10" aria-hidden="true"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-lg-3 mb-4">
+		<div class="card">
+			<div class="card-body p-3">
+				<div class="row mb-3">
+					<div class="col-8">
+						<div class="numbers">
+							<p class="text-sm mb-0 text-uppercase font-weight-bold">Total Pegawai Non Aktif</p>
+							<h5 class="font-weight-bolder"> <?= $pegawai_nonaktif ?>  Orang</h5>
+						</div>
+					</div>
+					<div class="col-4 text-end">
+						<div class="icon icon-shape bg-danger shadow-danger text-center rounded-circle">
+							<i class="fas fa-user-large-slash text-lg opacity-10" aria-hidden="true"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-lg-3 mb-4">
 		<div class="card">
 			<div class="card-body p-3">
 				<p class="text-sm text-uppercase font-weight-bold">Masuk Dashboard Presensi</p>
@@ -33,7 +74,7 @@
 			</div>
 			<div class="card-body p-3">
 				<div class="chart">
-					<canvas id="chart-line" class="chart-canvas" height="600" width="2152" style="display: block; box-sizing: border-box; height: 300px; width: 1076px;"></canvas>
+					<canvas id="chart-line" class="chart-canvas" height="400" style="display: block; box-sizing: border-box; height: 400px;"></canvas>
 				</div>
 			</div>
 		</div>

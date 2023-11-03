@@ -16,8 +16,11 @@
 				<div class="row px-4">
 					<div class="col-lg-4"></div>
 					<div class="col-lg-4"></div>
-					<div class="col-lg-4">
-						<input type="text" class="form-control form-control-sm" id="search-data" placeholder="Cari Pegawai ...">
+					<div class="col-lg-2">
+						<input type="text" class="form-control form-control-sm" id="search-data" placeholder="Cari Pegawai / NIP / Jabatan ...">
+					</div>
+					<div class="col-lg-2">
+						<input type="text" class="form-control form-control-sm" id="search-norek" placeholder="Cari No Rekening ...">
 					</div>
 				</div>
 				<div class="table-responsive p-3">
