@@ -20,7 +20,18 @@
             </div>
         </div>
         <div class="col-lg-8">
-            <div class="mt-3" id="my_camera"></div>
+            <div class="row">
+                <div class="col-10">
+                    <label class="form-control-label" for="videoSource">Sumber Kamera: </label>
+                    <select class="form-control select2" id="videoSource"></select>
+                </div>
+                <div class="col-10 mt-2">
+                    <div class="card shadow">
+                        <video class="rounded" id="video" style="width: 100%" autoplay></video>
+                        <canvas width="750" height="1000" id="canvas" style="display:none;"></canvas>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </form>

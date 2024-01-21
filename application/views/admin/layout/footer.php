@@ -30,32 +30,98 @@
   <?php if($this->uri->segment(2) == 'foto'): ?>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.25/webcam.js"></script>
     <script language="JavaScript">
-      Webcam.set({
-        width: 750,
-        height: 1000,
-        image_format: 'jpeg',
-        jpeg_quality: 100,
-        // flip_horiz: true,
-        // force_flash: true,
-        constraints: {
-          width: { exact: 750 },
-          height: { exact: 1000 }
-        }
-      });
-      Webcam.attach( '#my_camera' );
+      var videoElement = document.querySelector('video');
+      var videoSelect = document.querySelector('select#videoSource');
+
+      videoSelect.onchange = getStream;
+
+      getStream().then(getDevices).then(gotDevices);
+
+      function getDevices() {
+          return navigator.mediaDevices.enumerateDevices();
+      }
+
+      function gotDevices(deviceInfos) {
+          window.deviceInfos = deviceInfos;
+          console.log('Available input and output devices:', deviceInfos);
+          for (const deviceInfo of deviceInfos) {
+              const option = document.createElement('option');
+              option.value = deviceInfo.deviceId;
+              
+              if (deviceInfo.kind === 'videoinput') {
+                  option.text = deviceInfo.label || `Camera ${videoSelect.length + 1}`;
+                  videoSelect.appendChild(option);
+              }
+          }
+      }
+
+      function getStream() {
+          if (window.stream) {
+              window.stream.getTracks().forEach(track => {
+                  track.stop();
+              });
+          }
+
+          const videoSource = videoSelect.value;
+          const constraints = {
+              video: {deviceId: videoSource ? {exact: videoSource} : undefined}
+          };
+          return navigator.mediaDevices.getUserMedia(constraints).
+              then(gotStream).catch(handleError);
+      }
+
+      function gotStream(stream) {
+          window.stream = stream;
+          videoSelect.selectedIndex = [...videoSelect.options].
+          findIndex(option => option.text === stream.getVideoTracks()[0].label);
+          videoElement.srcObject = stream;
+      }
+
+      function handleError(error) {
+          console.error('Error: ', error);
+      }
 
       $('#upload').on('submit', function (event) {
         event.preventDefault();
         var image = '';
         var id = $('#id').val();
-        Webcam.snap( function(data_uri) {
-          image = data_uri;
-        });
+        var video = document.getElementById('video');
+        var canvas = document.getElementById('canvas');
+        var context = canvas.getContext('2d');
+
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+        var croppedCanvas = document.createElement('canvas');
+        var croppedContext = croppedCanvas.getContext('2d');
+
+        croppedCanvas.width = canvas.width;
+        croppedCanvas.height = canvas.height;
+
+        var targetWidth = 750;
+        var targetHeight = 1000;
+
+        var offsetX = (canvas.width - targetWidth) / 2;
+        var offsetY = (canvas.height - targetHeight) / 2;
+
+        croppedContext.putImageData(imageData, 0, 0);
+        var croppedImage = croppedContext.getImageData(offsetX, offsetY, targetWidth, targetHeight);
+
+        canvas.width = targetWidth;
+        canvas.height = targetHeight;
+
+        context.putImageData(croppedImage, 0, 0);
+
+        context.translate(targetWidth, 0);
+        context.scale(-1, 1);
+        context.drawImage(canvas, 0, 0, -targetWidth, targetHeight);
+
+        var imageData = canvas.toDataURL('image/png').replace(/^data:image\/(png|jpg);base64,/, '');
         $.ajax({
           url: '<?php echo site_url("admin/foto/save");?>',
           type: 'POST',
           dataType: 'json',
-          data: {id: id, image:image},
+          data: {id: id, image:imageData},
         }).done(function(data) {
           if (data === 1) {
             alert('Foto Berhasil Di Upload');
