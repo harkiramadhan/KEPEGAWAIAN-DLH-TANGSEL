@@ -10,7 +10,7 @@
                     <select class="form-control select2" name="id" id="id" required>
                         <option value=""> - Pilih Pegawai</option>
                         <?php foreach($pegawai->result() as $row){ ?>
-                            <option value="<?= $row->id ?>"> <?= $row->nama ?></option>
+                            <option value="<?= $row->id ?>"> <?= $row->nip . ' - ' . $row->nama ?></option>
                         <?php } ?>
                     </select>
                 </div>
